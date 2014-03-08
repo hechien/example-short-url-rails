@@ -1,0 +1,13 @@
+defaults: &defaults
+  googl:
+    username: <%= ENV["GOOGL_USERNAME"] %>
+    password: <%= ENV["GOOGL_PASSWORD"] %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
