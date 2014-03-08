@@ -24,12 +24,9 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @article = Article.new(article_params)
 
     respond_to do |format|
-      if @article.save
-        url = Googl.shorten(article_url(@article)).short_url
-        @article.update({ short_url: url })
+      if save_article
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render action: 'show', status: :created, location: @article }
       else
@@ -72,5 +69,14 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :content, :short_url)
+    end
+
+    def save_article
+      @article = Article.create(article_params)
+      if @article.persisted?
+        @article.update({ :short_url => Googl.shorten(article_url(@article)).short_url })
+        return true
+      end
+      false
     end
 end
