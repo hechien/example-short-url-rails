@@ -1,7 +1,7 @@
 defaults: &defaults
   googl:
-    username: "foobar@gmail.com"
-    password: "foofoofoobarbarbar"
+    username: <%= ENV["GOOGL_USERNAME"] %>
+    password: <%= ENV["GOOGL_PASSWORD"] %>
 
 development:
   <<: *defaults
