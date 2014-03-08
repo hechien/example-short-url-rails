@@ -28,6 +28,8 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
+        url = Googl.shorten(article_url(@article)).short_url
+        @article.update({ short_url: url })
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render action: 'show', status: :created, location: @article }
       else
