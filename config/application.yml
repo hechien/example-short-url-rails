@@ -1,0 +1,13 @@
+defaults: &defaults
+  googl:
+    username: "foobar@gmail.com"
+    password: "foofoofoobarbarbar"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

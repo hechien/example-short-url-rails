@@ -74,7 +74,7 @@ class ArticlesController < ApplicationController
     def save_article
       @article = Article.create(article_params)
       if @article.persisted?
-        client = Googl.client('foobar@gmail.com', 'foofoofoobarbarbar')
+        client = Googl.client(Settings.googl.username, Settings.googl.password)
         @article.update({ :short_url => client.shorten(article_url(@article)).short_url })
         return true
       end
