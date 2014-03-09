@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        @article.update({ :short_url => ShortenUrl.instance.shorten(article_url(article)) })
+        @article.update({ :short_url => ShortenUrl.instance.shorten(article_url(@article)) })
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render action: 'show', status: :created, location: @article }
       else
