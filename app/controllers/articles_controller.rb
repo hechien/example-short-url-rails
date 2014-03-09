@@ -74,7 +74,7 @@ class ArticlesController < ApplicationController
     def save_article
       @article = Article.create(article_params)
       if @article.persisted?
-        @article.update({ :short_url => ShortenUrl.new(article_url(@article)).shorten })
+        @article.update({ :short_url => ShortenUrl.instance.shorten(article_url(@article)) })
         return true
       end
       false

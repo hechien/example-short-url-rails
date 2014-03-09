@@ -1,11 +1,12 @@
+require 'singleton'
 class ShortenUrl
+  include Singleton
   
-  def initialize(url)
-    @url = url
+  def initialize
     @client = Googl.client(Settings.googl.username, Settings.googl.password)
   end
 
-  def shorten
-    @client.shorten(@url).short_url
+  def shorten(url)
+    @client.shorten(url).short_url
   end
 end
